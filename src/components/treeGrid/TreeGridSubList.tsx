@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ItemTree, NewItemTree } from "./types/Item";
+import { ItemTree } from "./types/Item";
 import styled from "styled-components";
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
+import { ItensTree } from "./types/Itens";
 
 
 interface IProps{
-    jsonListData: ItemTree;
+    jsonListData: ItensTree;
     tittle?: string;
     columns: string[];
     children?: React.ReactNode
@@ -25,13 +26,13 @@ const ExpandTd = styled.td`
 `
 
 
-export default function TreeGridList({ jsonListData, tittle, columns, children } : IProps) {
+export default function TreeGridSubList({ jsonListData, tittle, columns, children } : IProps) {
 
-    const [item, setItem] = useState(NewItemTree)
+    const [list, setList] = useState(new Array<ItemTree>)
     const [open, setOpen] = useState(true)
 
     useEffect(() => {
-        setItem(jsonListData);
+        setList(jsonListData);
     }, [])
 
     function typedKeys<T extends {}>(param: T): (keyof T)[] {
@@ -57,18 +58,13 @@ export default function TreeGridList({ jsonListData, tittle, columns, children }
         </ExpandTittle>
         {open ? 
             <>
-            <tr key={item.id}>
-                    {typedKeys(item).map(column => 
-                        <td key={`${item.id}-${column}`}> { item[`${column}`]} </td>
-                    )}
-                </tr>
-                {/* {list.map(item => 
+                {list.map(item => 
                     <tr key={item.id}>
                         {typedKeys(item).map(column => 
                             <td key={`${item.id}-${column}`}> { item[`${column}`]} </td>
                         )}
                     </tr>
-                )} */}
+                )}
                 {children ? children : null}
             </>
             : null

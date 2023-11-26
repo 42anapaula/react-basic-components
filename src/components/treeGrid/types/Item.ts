@@ -4,11 +4,10 @@ export type Item = object & {
 }
 
 export type ItemTree = object & {
-id: number;
-[key: string]: string | number | boolean
+    id: number;
+    [key: string]: string | number | boolean
 }
 
-
-export class ItemTreeClass {
-    constructor(private type: ItemTree){}
+export const NewItemTree: ItemTree = {
+    id: 0
 }

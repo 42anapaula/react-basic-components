@@ -7,7 +7,16 @@ interface ITreeGridProps{
 }
 
 const TablePersonalizada = styled.table`
-    background-color: red;
+    padding: 10px;
+    background-color: grey;
+    border-radius: 5px;
+    td{
+        padding: 5px;
+    }
+`
+
+const HeadPersonalizada = styled.thead`
+    
 `
 
 
@@ -16,13 +25,13 @@ export default function TreeGrid({ columns, children } : ITreeGridProps) {
     <div>TreeGrid
         
         <TablePersonalizada>
-            <thead>
+            <HeadPersonalizada>
                 <tr>
                     {columns.map(column => 
                         <th key={column}> {column} </th>
                     )}
                 </tr>
-            </thead>
+            </HeadPersonalizada>
             <tbody>
                 {children}
             </tbody>
